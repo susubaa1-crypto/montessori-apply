@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>호르메 몬테소리 감각교육 | 3기 신청</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, sans-serif; background: #f5f1ed; color: #1a1a1a; }
+    .back-bar { background: #fff; padding: 14px 20px; border-bottom: 1px solid #e8e0d8; max-width: 600px; margin: 0 auto; }
+    .back-bar a { font-size: 14px; color: #8B1A1A; text-decoration: none; font-weight: 600; }
+    .detail-images img { width: 100%; display: block; }
+    .form-wrap { background: #fff; max-width: 600px; margin: 0 auto; padding: 40px 24px 72px; }
+    .form-header { text-align: center; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #1a1a1a; }
+    .form-header h2 { font-size: 22px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; letter-spacing: -0.3px; }
+    .form-header p { font-size: 13.5px; color: #999; }
+    .payment-box { background: #fffcfa; border: 1px solid #e0d8d0; border-left: 4px solid #8B1A1A; border-radius: 2px; padding: 20px 20px 18px; margin-bottom: 32px; }
+    .payment-box-title { font-size: 11px; font-weight: 800; color: #8B1A1A; letter-spacing: 1.8px; margin-bottom: 14px; }
+    .payment-bank { font-size: 13px; color: #888; margin-bottom: 3px; }
+    .payment-account { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 1.5px; margin-bottom: 3px; }
+    .payment-holder { font-size: 13px; color: #888; margin-bottom: 14px; }
+    .payment-note { font-size: 13px; color: #8B1A1A; font-weight: 700; border-top: 1px solid #e8e0d8; padding-top: 12px; line-height: 1.75; }
+    .field { margin-bottom: 22px; }
+    label.field-label { display: block; font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; letter-spacing: 0.2px; }
+    label.field-label .req { color: #8B1A1A; margin-left: 2px; }
+    input[type="text"], input[type="tel"], select { width: 100%; padding: 13px 14px; border: 1px solid #d8d0c8; border-radius: 4px; font-size: 15px; color: #1a1a1a; background: #fff; outline: none; transition: border-color 0.15s; -webkit-appearance: none; }
+    input:focus, select:focus { border-color: #8B1A1A; border-width: 1.5px; }
+    .account-row { display: flex; gap: 8px; }
+    .account-row select { flex: 0 0 130px; }
+    .account-row input { flex: 1; }
+    .receipt-row { display: flex; align-items: center; gap: 12px; }
+    .receipt-row input[type="text"] { flex: 1; }
+    .receipt-no-check { display: flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0; }
+    .receipt-no-check input[type="checkbox"] { width: 18px; height: 18px; accent-color: #8B1A1A; cursor: pointer; border: none; padding: 0; }
+    .receipt-no-check label { font-size: 13.5px; color: #666; cursor: pointer; }
+    .notice-box { background: #faf6f2; border: 1px solid #e0d8d0; border-radius: 4px; padding: 18px 16px 14px; margin-bottom: 28px; }
+    .notice-box-title { font-size: 13px; font-weight: 800; color: #1a1a1a; margin-bottom: 14px; letter-spacing: -0.2px; }
+    .check-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 11px; }
+    .check-item:last-child { margin-bottom: 0; }
+    .check-item input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; accent-color: #8B1A1A; cursor: pointer; border: none; padding: 0; }
+    .check-item label { font-size: 13.5px; font-weight: 500; color: #333; line-height: 1.55; cursor: pointer; display: block; margin-bottom: 0; }
+    .submit-btn { width: 100%; padding: 17px; background: #8B1A1A; color: #fff; font-size: 16px; font-weight: 800; border: none; border-radius: 4px; cursor: pointer; letter-spacing: 0.5px; transition: background 0.15s; }
+    .submit-btn:hover:not(:disabled) { background: #6e1414; }
+    .submit-btn:disabled { background: #bbb; cursor: not-allowed; }
+    .success-screen { display: none; text-align: center; padding: 60px 20px; }
+    .success-screen .icon { font-size: 52px; margin-bottom: 14px; }
+    .success-screen h3 { font-size: 22px; font-weight: 800; color: #8B1A1A; margin-bottom: 12px; }
+    .success-screen p { font-size: 15px; color: #555; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<div class="back-bar">
+  <a href="index.html">← 교육 선택으로 돌아가기</a>
+</div>
+
+<div class="detail-images">
+  <img src="images/sensory/1.jpg" alt="감각교육 1">
+  <img src="images/sensory/2.jpg" alt="감각교육 2">
+  <a href="https://naver.me/FgESE6ip" target="_blank" rel="noopener">
+    <img src="images/sensory/3.jpg" alt="후기 1">
+  </a>
+  <a href="https://naver.me/5bCuC4Sq" target="_blank" rel="noopener">
+    <img src="images/sensory/4.jpg" alt="후기 2">
+  </a>
+  <a href="https://naver.me/Ix0W0L7r" target="_blank" rel="noopener">
+    <img src="images/sensory/5.jpg" alt="후기 3">
+  </a>
+  <img src="images/sensory/6.jpg" alt="감각교육 6">
+  <img src="images/sensory/7.jpg" alt="감각교육 7">
+  <img src="images/sensory/8.jpg" alt="감각교육 8">
+  <a href="https://cafe.naver.com/f-e/cafes/21818873/menus/921?viewType=L" target="_blank" rel="noopener">
+    <img src="images/sensory/9.jpg" alt="과제 1">
+  </a>
+  <img src="images/sensory/10.jpg" alt="감각교육 10">
+  <a href="https://cafe.naver.com/f-e/cafes/21818873/menus/922" target="_blank" rel="noopener">
+    <img src="images/sensory/11.jpg" alt="과제 2">
+  </a>
+  <img src="images/sensory/12.jpg" alt="감각교육 12">
+  <a href="https://cafe.naver.com/f-e/cafes/21818873/menus/923" target="_blank" rel="noopener">
+    <img src="images/sensory/13.jpg" alt="과제 3">
+  </a>
+  <img src="images/sensory/14.jpg" alt="감각교육 14">
+  <a href="https://cafe.naver.com/f-e/cafes/21818873/menus/924" target="_blank" rel="noopener">
+    <img src="images/sensory/15.jpg" alt="과제 4">
+  </a>
+  <img src="images/sensory/16.jpg" alt="감각교육 16">
+  <img src="images/sensory/17.jpg" alt="감각교육 17">
+</div>
+
+<div class="form-wrap">
+  <div class="form-header">
+    <h2>감각교육 수강 신청하기</h2>
+    <p>아래 내용을 빠짐없이 작성해 주세요 ✍️</p>
+  </div>
+
+  <div class="payment-box">
+    <div class="payment-box-title">💳 입금 계좌 안내</div>
+    <div class="payment-bank">농협</div>
+    <div class="payment-account">301-0316-8861-41</div>
+    <div class="payment-holder">주식회사 슈필하우스</div>
+    <div style="font-size:20px; font-weight:800; color:#8B1A1A; margin-bottom:12px; letter-spacing:0.5px;">입금 금액: 119,900원</div>
+    <div class="payment-note">입금자명: 이름 + 핸드폰 뒷 4자리<br>예) 홍길동5678</div>
+  </div>
+
+  <form id="signupForm">
+    <div class="field">
+      <label class="field-label" for="name">이름 <span class="req">*</span></label>
+      <input type="text" id="name" placeholder="홍길동" required>
+    </div>
+    <div class="field">
+      <label class="field-label" for="phone">연락처 <span class="req">*</span></label>
+      <input type="tel" id="phone" placeholder="010-0000-0000" required>
+    </div>
+    <div class="field">
+      <label class="field-label" for="childAge">아이 나이 <span class="req">*</span></label>
+      <input type="text" id="childAge" placeholder="예) 만 2세 / 만 3세, 5세 (여러 명이면 모두 기재)">
+    </div>
+    <div class="field">
+      <label class="field-label">100% 미션 하고 2만원 돌려받으세요! (환불 계좌) <span class="req">*</span></label>
+      <div class="account-row">
+        <select id="bank" required>
+          <option value="">은행 선택</option>
+          <option>카카오뱅크</option><option>토스뱅크</option><option>국민은행</option>
+          <option>신한은행</option><option>우리은행</option><option>하나은행</option>
+          <option>농협은행</option><option>기업은행</option><option>SC제일은행</option>
+          <option>케이뱅크</option><option>새마을금고</option><option>우체국</option>
+          <option>수협은행</option><option>대구은행</option><option>부산은행</option><option>기타</option>
+        </select>
+        <input type="text" id="accountNum" placeholder="계좌번호 (숫자만)" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label" for="accountHolder">예금주 <span class="req">*</span></label>
+      <input type="text" id="accountHolder" placeholder="예금주 성함" required>
+    </div>
+    <div class="field">
+      <label class="field-label" for="receipt">현금영수증 번호</label>
+      <div class="receipt-row">
+        <input type="text" id="receipt" placeholder="010-0000-0000 또는 사업자번호">
+        <div class="receipt-no-check">
+          <input type="checkbox" id="noReceipt">
+          <label for="noReceipt">필요없음</label>
+        </div>
+      </div>
+    </div>
+    <div class="notice-box">
+      <div class="notice-box-title">📋 강의 내용 확인하셨나요? (4가지 모두 체크 필수)</div>
+      <div class="check-item"><input type="checkbox" id="c1" required><label for="c1">줌 카메라를 무조건 켜주셔야 참여 가능합니다.</label></div>
+      <div class="check-item"><input type="checkbox" id="c2" required><label for="c2">녹화본은 제공드리지 않습니다.</label></div>
+      <div class="check-item"><input type="checkbox" id="c3" required><label for="c3">강의 녹화, 녹음은 불가능합니다.</label></div>
+      <div class="check-item"><input type="checkbox" id="c4" required><label for="c4">선착순은 입금순으로 마감됩니다.</label></div>
+    </div>
+    <button type="submit" class="submit-btn" id="submitBtn">신청 완료하기</button>
+  </form>
+
+  <div class="success-screen" id="successScreen">
+    <div class="icon">✅</div>
+    <h3>신청이 완료됐습니다!</h3>
+    <p>입금 안내는 곧 카카오톡 또는 문자로<br>전송드립니다.<br><br>문의사항은 키키맘 채널로 연락 주세요 🙏</p>
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXFtHC26Ak7YaiK1wl51SYZIgzQ7qYI6lanQtnYK3hrKdedfy5po0vqTz4ozteqHe0/exec';
+
+  // 감각교육 마감
+  document.getElementById('signupForm').style.display = 'none';
+  const closed = document.createElement('div');
+  closed.style.cssText = 'text-align:center;padding:60px 20px';
+  closed.innerHTML = '<div style="font-size:52px;margin-bottom:14px">🔒</div><h3 style="font-size:22px;font-weight:800;color:#8B1A1A;margin-bottom:12px">감각교육이 마감되었습니다</h3><p style="font-size:15px;color:#555;line-height:1.7">40명 정원이 모두 채워졌습니다.<br>다음 기수를 기대해 주세요 🙏</p>';
+  document.querySelector('.form-wrap').appendChild(closed);
+
+  document.getElementById('noReceipt').addEventListener('change', function () {
+    const input = document.getElementById('receipt');
+    input.value = this.checked ? '필요없음' : '';
+    input.disabled = this.checked;
+  });
+
+  document.getElementById('signupForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '제출 중...';
+
+    const payload = {
+      신청시간: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+      과정구분: '감각교육',
+      이름: document.getElementById('name').value.trim(),
+      연락처: document.getElementById('phone').value.trim(),
+      아이나이: document.getElementById('childAge').value.trim(),
+      은행: document.getElementById('bank').value,
+      계좌번호: document.getElementById('accountNum').value.trim(),
+      예금주: document.getElementById('accountHolder').value.trim(),
+      현금영수증: document.getElementById('receipt').value.trim() || '미입력',
+    };
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    try {
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload), signal: controller.signal });
+      clearTimeout(timer);
+      document.getElementById('signupForm').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'block';
+    } catch (err) {
+      clearTimeout(timer);
+      alert(err.name === 'AbortError' ? '요청 시간이 초과됐습니다. 잠시 후 다시 시도해 주세요.' : '오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      btn.disabled = false;
+      btn.textContent = '신청 완료하기';
+    }
+  });
+</script>
+</body>
+</html>
