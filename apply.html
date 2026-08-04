@@ -41,6 +41,7 @@
     .submit-btn { width: 100%; padding: 17px; background: #8B1A1A; color: #fff; font-size: 16px; font-weight: 800; border: none; border-radius: 4px; cursor: pointer; letter-spacing: 0.5px; transition: background 0.15s; }
     .submit-btn:hover:not(:disabled) { background: #6e1414; }
     .submit-btn:disabled { background: #bbb; cursor: not-allowed; }
+    .detail-images img { width: 100%; display: block; }
     .success-screen, .closed-screen, .error-screen { display: none; text-align: center; padding: 60px 20px; }
     .success-screen .icon, .closed-screen .icon, .error-screen .icon { font-size: 52px; margin-bottom: 14px; }
     .success-screen h3, .closed-screen h3, .error-screen h3 { font-size: 22px; font-weight: 800; color: #8B1A1A; margin-bottom: 12px; }
@@ -52,6 +53,8 @@
 <div class="back-bar">
   <a href="index.html">← 교육 선택으로 돌아가기</a>
 </div>
+
+<div class="detail-images" id="detailImages"></div>
 
 <div class="form-wrap" id="formWrap">
   <div class="form-header" id="formHeader">
@@ -154,6 +157,54 @@ var ROUNDS = {
 };
 var COURSE_NAME = { basic: '기본교육', sensory: '감각교육' };
 
+var DETAIL_IMAGES = {
+  basic: [
+    { src:'images/basic/1.jpg', alt:'기본교육 1' },
+    { src:'images/basic/2.jpg', alt:'기본교육 2' },
+    { src:'images/basic/3.jpg', alt:'후기 1', link:'https://naver.me/FgESE6ip' },
+    { src:'images/basic/4.jpg', alt:'후기 2', link:'https://naver.me/5bCuC4Sq' },
+    { src:'images/basic/5.jpg', alt:'후기 3', link:'https://naver.me/Ix0W0L7r' },
+    { src:'images/basic/6.jpg', alt:'기본교육 6' },
+    { src:'images/basic/7.jpg', alt:'기본교육 7' },
+    { src:'images/basic/8.jpg', alt:'기본교육 8' },
+    { src:'images/basic/9.jpg', alt:'과제 1', link:'https://cafe.naver.com/jungtoysday/82963' },
+    { src:'images/basic/10.jpg', alt:'기본교육 10' },
+    { src:'images/basic/11.jpg', alt:'과제 2', link:'https://cafe.naver.com/jungtoysday/83142' },
+    { src:'images/basic/12.jpg', alt:'기본교육 12' },
+    { src:'images/basic/13.jpg', alt:'과제 3', link:'https://cafe.naver.com/jungtoysday/81241' },
+    { src:'images/basic/14.jpg', alt:'기본교육 14' },
+    { src:'images/basic/15.jpg', alt:'기본교육 15' }
+  ],
+  sensory: [
+    { src:'images/sensory/1.jpg', alt:'감각교육 1' },
+    { src:'images/sensory/2.jpg', alt:'감각교육 2' },
+    { src:'images/sensory/3.jpg', alt:'후기 1', link:'https://naver.me/FgESE6ip' },
+    { src:'images/sensory/4.jpg', alt:'후기 2', link:'https://naver.me/5bCuC4Sq' },
+    { src:'images/sensory/5.jpg', alt:'후기 3', link:'https://naver.me/Ix0W0L7r' },
+    { src:'images/sensory/6.jpg', alt:'감각교육 6' },
+    { src:'images/sensory/7.jpg', alt:'감각교육 7' },
+    { src:'images/sensory/8.jpg', alt:'감각교육 8' },
+    { src:'images/sensory/9.jpg', alt:'과제 1', link:'https://cafe.naver.com/f-e/cafes/21818873/menus/921?viewType=L' },
+    { src:'images/sensory/10.jpg', alt:'감각교육 10' },
+    { src:'images/sensory/11.jpg', alt:'과제 2', link:'https://cafe.naver.com/f-e/cafes/21818873/menus/922' },
+    { src:'images/sensory/12.jpg', alt:'감각교육 12' },
+    { src:'images/sensory/13.jpg', alt:'과제 3', link:'https://cafe.naver.com/f-e/cafes/21818873/menus/923' },
+    { src:'images/sensory/14.jpg', alt:'감각교육 14' },
+    { src:'images/sensory/15.jpg', alt:'과제 4', link:'https://cafe.naver.com/f-e/cafes/21818873/menus/924' },
+    { src:'images/sensory/16.jpg', alt:'감각교육 16' },
+    { src:'images/sensory/17.jpg', alt:'감각교육 17' }
+  ]
+};
+
+function renderDetailImages(courseKey) {
+  var list = DETAIL_IMAGES[courseKey] || [];
+  var el = document.getElementById('detailImages');
+  el.innerHTML = list.map(function(img) {
+    var tag = '<img src="' + img.src + '" alt="' + img.alt + '">';
+    return img.link ? '<a href="' + img.link + '" target="_blank" rel="noopener">' + tag + '</a>' : tag;
+  }).join('');
+}
+
 var params = new URLSearchParams(window.location.search);
 var roundNo = params.get('round');
 var courseKey = params.get('course');
@@ -165,11 +216,13 @@ if (!round || !course) {
   document.querySelector('.payment-box').style.display = 'none';
   document.getElementById('errorScreen').style.display = 'block';
 } else if (course.closed) {
+  renderDetailImages(courseKey);
   document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
   document.getElementById('closedScreen').style.display = 'block';
 } else {
+  renderDetailImages(courseKey);
   document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
   document.title = round.label + ' ' + COURSE_NAME[courseKey] + ' | 호르메 몬테소리 신청';
 
