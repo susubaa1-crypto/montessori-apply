@@ -91,6 +91,13 @@
       opacity: 0.7;
     }
 
+    .course-btn.waiting {
+      background: #fff;
+      border-color: #d8d0c8;
+      color: #8a7f70;
+      cursor: default;
+    }
+
     .course-btn .btn-title {
       font-size: 16px;
       font-weight: 800;
@@ -121,25 +128,32 @@
 <script>
 /* ===== 기수 데이터 — 날짜/마감 수정은 여기서 ===== */
 var ROUNDS = [
-  { no: 3, label: '3기', basic: { day:'목', time:'야간 9시~12시', start:'2026-07-23', startLabel:'7/23(목)', closed:true },
-                          sensory: { day:'금', time:'야간 9시~12시', start:'2026-07-24', startLabel:'7/24(금)', closed:true } },
-  { no: 4, label: '4기', basic: { day:'금', time:'오전 10:30~1:30', start:'2026-08-21', startLabel:'8/21(금)', closed:false },
-                          sensory: { day:'목', time:'야간 9시~12시', start:'2026-08-20', startLabel:'8/20(목)', closed:false } },
-  { no: 5, label: '5기', basic: { day:'목', time:'야간 9시~12시', start:'2026-09-17', startLabel:'9/17(목)', closed:false },
-                          sensory: { day:'금', time:'오전 10:30~1:30', start:'2026-09-18', startLabel:'9/18(금)', closed:false } },
-  { no: 6, label: '6기', basic: { day:'금', time:'오전 10:30~1:30', start:'2026-10-23', startLabel:'10/23(금)', closed:false },
-                          sensory: { day:'목', time:'야간 9시~12시', start:'2026-10-22', startLabel:'10/22(목)', closed:false } },
-  { no: 7, label: '7기', basic: { day:'목', time:'야간 9시~12시', start:'2026-11-19', startLabel:'11/19(목)', closed:false },
-                          sensory: { day:'금', time:'오전 10:30~1:30', start:'2026-11-20', startLabel:'11/20(금)', closed:false } }
+  { no: 3, label: '3기', basic: { day:'목', time:'야간 9시~12시', start:'2026-07-23', startLabel:'7/23(목)', status:'closed' },
+                          sensory: { day:'금', time:'야간 9시~12시', start:'2026-07-24', startLabel:'7/24(금)', status:'closed' } },
+  { no: 4, label: '4기', basic: { day:'금', time:'오전 10:30~1:30', start:'2026-08-21', startLabel:'8/21(금)', status:'open' },
+                          sensory: { day:'목', time:'야간 9시~12시', start:'2026-08-20', startLabel:'8/20(목)', status:'open' } },
+  { no: 5, label: '5기', basic: { day:'목', time:'야간 9시~12시', start:'2026-09-17', startLabel:'9/17(목)', status:'waiting' },
+                          sensory: { day:'금', time:'오전 10:30~1:30', start:'2026-09-18', startLabel:'9/18(금)', status:'waiting' } },
+  { no: 6, label: '6기', basic: { day:'금', time:'오전 10:30~1:30', start:'2026-10-23', startLabel:'10/23(금)', status:'waiting' },
+                          sensory: { day:'목', time:'야간 9시~12시', start:'2026-10-22', startLabel:'10/22(목)', status:'waiting' } },
+  { no: 7, label: '7기', basic: { day:'목', time:'야간 9시~12시', start:'2026-11-19', startLabel:'11/19(목)', status:'waiting' },
+                          sensory: { day:'금', time:'오전 10:30~1:30', start:'2026-11-20', startLabel:'11/20(금)', status:'waiting' } }
 ];
 
 function courseBtn(round, courseKey, courseName) {
   var c = round[courseKey];
-  if (c.closed) {
+  if (c.status === 'closed') {
     return '<span class="course-btn closed">'
       + '<span class="arrow">✕</span>'
       + '<span class="btn-title">' + courseName + ' — 마감되었습니다</span>'
       + '<span class="btn-desc">신청이 마감되었습니다. 다음 기수를 기대해 주세요.</span>'
+      + '</span>';
+  }
+  if (c.status === 'waiting') {
+    return '<span class="course-btn waiting">'
+      + '<span class="arrow">⏳</span>'
+      + '<span class="btn-title">' + courseName + ' — 신청 대기중</span>'
+      + '<span class="btn-desc">' + c.day + '요일 ' + c.time + ' · ' + c.startLabel + ' 시작 · 오픈 시 안내드립니다</span>'
       + '</span>';
   }
   var href = 'apply.html?round=' + round.no + '&course=' + courseKey;

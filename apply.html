@@ -134,6 +134,12 @@
     <p>해당 기수/과정은 마감되었습니다.<br>다음 기수를 기대해 주세요 🙏</p>
   </div>
 
+  <div class="closed-screen" id="waitingScreen">
+    <div class="icon">⏳</div>
+    <h3>신청 대기중입니다</h3>
+    <p>해당 기수는 아직 신청을 받고 있지 않아요.<br>오픈되면 안내드리겠습니다 🙏</p>
+  </div>
+
   <div class="error-screen" id="errorScreen">
     <div class="icon">⚠️</div>
     <h3>잘못된 접근입니다</h3>
@@ -144,16 +150,16 @@
 <script>
 /* ===== 기수 데이터 — index.html의 ROUNDS와 동일하게 유지 ===== */
 var ROUNDS = {
-  3: { label: '3기', basic: { day:'목', time:'야간 9시~12시', startLabel:'7/23(목)', closed:true },
-                      sensory: { day:'금', time:'야간 9시~12시', startLabel:'7/24(금)', closed:true } },
-  4: { label: '4기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'8/21(금)', closed:false },
-                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'8/20(목)', closed:false } },
-  5: { label: '5기', basic: { day:'목', time:'야간 9시~12시', startLabel:'9/17(목)', closed:false },
-                      sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'9/18(금)', closed:false } },
-  6: { label: '6기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'10/23(금)', closed:false },
-                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'10/22(목)', closed:false } },
-  7: { label: '7기', basic: { day:'목', time:'야간 9시~12시', startLabel:'11/19(목)', closed:false },
-                      sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'11/20(금)', closed:false } }
+  3: { label: '3기', basic: { day:'목', time:'야간 9시~12시', startLabel:'7/23(목)', status:'closed' },
+                      sensory: { day:'금', time:'야간 9시~12시', startLabel:'7/24(금)', status:'closed' } },
+  4: { label: '4기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'8/21(금)', status:'open' },
+                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'8/20(목)', status:'open' } },
+  5: { label: '5기', basic: { day:'목', time:'야간 9시~12시', startLabel:'9/17(목)', status:'waiting' },
+                      sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'9/18(금)', status:'waiting' } },
+  6: { label: '6기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'10/23(금)', status:'waiting' },
+                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'10/22(목)', status:'waiting' } },
+  7: { label: '7기', basic: { day:'목', time:'야간 9시~12시', startLabel:'11/19(목)', status:'waiting' },
+                      sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'11/20(금)', status:'waiting' } }
 };
 var COURSE_NAME = { basic: '기본교육', sensory: '감각교육' };
 
@@ -215,12 +221,18 @@ if (!round || !course) {
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
   document.getElementById('errorScreen').style.display = 'block';
-} else if (course.closed) {
+} else if (course.status === 'closed') {
   renderDetailImages(courseKey);
   document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
   document.getElementById('closedScreen').style.display = 'block';
+} else if (course.status === 'waiting') {
+  renderDetailImages(courseKey);
+  document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
+  document.getElementById('signupForm').style.display = 'none';
+  document.querySelector('.payment-box').style.display = 'none';
+  document.getElementById('waitingScreen').style.display = 'block';
 } else {
   renderDetailImages(courseKey);
   document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
