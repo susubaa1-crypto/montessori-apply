@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>호르메 몬테소리 부모교육 | 3기 신청</title>
+  <title>호르메 몬테소리 부모교육 | 신청</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -12,22 +12,20 @@
       background: #f5f1ed;
       color: #1a1a1a;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
+      padding: 40px 20px 60px;
     }
 
     .wrap {
       background: #fff;
-      max-width: 480px;
+      max-width: 560px;
       width: 100%;
+      margin: 0 auto;
       border-radius: 8px;
-      padding: 48px 32px 52px;
-      text-align: center;
+      padding: 44px 32px 48px;
       box-shadow: 0 2px 20px rgba(0,0,0,0.07);
     }
+
+    .head { text-align: center; margin-bottom: 30px; }
 
     .badge {
       display: inline-block;
@@ -39,155 +37,140 @@
       border: 1px solid #e8c8c8;
       border-radius: 20px;
       padding: 5px 14px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     h1 {
       font-size: 24px;
       font-weight: 900;
-      color: #1a1a1a;
       line-height: 1.4;
       letter-spacing: -0.5px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .subtitle {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 32px;
-      line-height: 1.6;
+    .subtitle { font-size: 14px; color: #888; line-height: 1.6; }
+
+    .round {
+      border: 1px solid #e8e0d8;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
     }
 
-    .schedule-info {
+    .round-h {
       background: #faf6f2;
-      border-radius: 6px;
-      padding: 16px 18px;
-      margin-bottom: 28px;
-      text-align: left;
-    }
-    .schedule-row {
-      display: flex;
-      gap: 10px;
-      font-size: 13.5px;
-      line-height: 1.6;
-      margin-bottom: 6px;
-    }
-    .schedule-row:last-child { margin-bottom: 0; }
-    .schedule-label {
+      padding: 12px 18px;
+      font-size: 13px;
       font-weight: 800;
       color: #8B1A1A;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .schedule-desc { color: #444; }
-
-    .question {
-      font-size: 15px;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 16px;
-    }
-
-    .btn-group {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
     }
+    .round-h .start { font-weight: 500; color: #999; }
+
+    .btn-group { display: flex; flex-direction: column; gap: 10px; padding: 14px; }
 
     .course-btn {
       display: block;
       text-decoration: none;
-      padding: 20px;
+      padding: 16px 18px;
       border-radius: 6px;
       border: 2px solid transparent;
       transition: all 0.15s;
       text-align: left;
     }
 
-    .course-btn.basic {
-      background: #8B1A1A;
-      color: #fff;
-    }
-    .course-btn.basic:hover { background: #6e1414; }
+    .course-btn.open { background: #8B1A1A; color: #fff; }
+    .course-btn.open:hover { background: #6e1414; }
 
-    .course-btn.sensory {
-      background: #fff;
-      border-color: #8B1A1A;
-      color: #8B1A1A;
+    .course-btn.closed {
+      background: #f2f2f2;
+      color: #999;
+      cursor: default;
+      opacity: 0.7;
     }
-    .course-btn.sensory:hover { background: #fdf3f3; }
 
     .course-btn .btn-title {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       display: block;
       margin-bottom: 3px;
       letter-spacing: -0.3px;
     }
     .course-btn .btn-desc {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 400;
-      opacity: 0.8;
+      opacity: 0.85;
       display: block;
     }
-    .course-btn .arrow {
-      float: right;
-      font-size: 18px;
-      margin-top: 2px;
-    }
+    .course-btn .arrow { float: right; font-size: 18px; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="badge">3기 모집</div>
-    <h1>호르메 몬테소리<br>부모교육</h1>
-    <p class="subtitle">줌(ZOOM) 소그룹 공동구매 수업</p>
-
-    <div class="schedule-info">
-      <div class="schedule-row">
-        <span class="schedule-label">기본교육</span>
-        <span class="schedule-desc">7/23(목)부터 매주 목요일 밤 9시 · 총 4회차</span>
-      </div>
-      <div class="schedule-row">
-        <span class="schedule-label">감각교육</span>
-        <span class="schedule-desc">7/24(금)부터 매주 금요일 밤 9시 · 총 4회차</span>
-      </div>
+    <div class="head">
+      <div class="badge">전체 기수 모집중</div>
+      <h1>호르메 몬테소리<br>부모교육</h1>
+      <p class="subtitle">줌(ZOOM) 소그룹 공동구매 수업<br>원하시는 개강일을 선택해 신청해 주세요</p>
     </div>
 
-    <p class="question">어떤 교육을 신청하시겠어요?</p>
-
-    <div class="btn-group">
-      <a href="basic.html" class="course-btn basic" id="btn-basic">
-        <span class="arrow">→</span>
-        <span class="btn-title">기본교육 신청하기</span>
-        <span class="btn-desc">목요일 밤 9시 · 7/23 시작</span>
-      </a>
-      <a class="course-btn sensory" id="btn-sensory" style="cursor:default;opacity:0.55;">
-        <span class="arrow">✕</span>
-        <span class="btn-title">감각교육 — 마감되었습니다</span>
-        <span class="btn-desc">신청이 마감되었습니다. 다음 기수를 기대해 주세요.</span>
-      </a>
-    </div>
+    <div id="rounds"></div>
   </div>
-</body>
+
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXFtHC26Ak7YaiK1wl51SYZIgzQ7qYI6lanQtnYK3hrKdedfy5po0vqTz4ozteqHe0/exec';
+/* ===== 기수 데이터 — 날짜/마감 수정은 여기서 ===== */
+var ROUNDS = [
+  { no: 3, label: '3기', basic: { day:'목', time:'야간 9시~12시', start:'2026-07-23', startLabel:'7/23(목)', closed:false },
+                          sensory: { day:'금', time:'야간 9시~12시', start:'2026-07-24', startLabel:'7/24(금)', closed:true } },
+  { no: 4, label: '4기', basic: { day:'금', time:'오전 10:30~1:30', start:'2026-08-21', startLabel:'8/21(금)', closed:false },
+                          sensory: { day:'목', time:'야간 9시~12시', start:'2026-08-20', startLabel:'8/20(목)', closed:false } },
+  { no: 5, label: '5기', basic: { day:'목', time:'야간 9시~12시', start:'2026-09-17', startLabel:'9/17(목)', closed:false },
+                          sensory: { day:'금', time:'오전 10:30~1:30', start:'2026-09-18', startLabel:'9/18(금)', closed:false } },
+  { no: 6, label: '6기', basic: { day:'금', time:'오전 10:30~1:30', start:'2026-10-23', startLabel:'10/23(금)', closed:false },
+                          sensory: { day:'목', time:'야간 9시~12시', start:'2026-10-22', startLabel:'10/22(목)', closed:false } },
+  { no: 7, label: '7기', basic: { day:'목', time:'야간 9시~12시', start:'2026-11-19', startLabel:'11/19(목)', closed:false },
+                          sensory: { day:'금', time:'오전 10:30~1:30', start:'2026-11-20', startLabel:'11/20(금)', closed:false } }
+];
 
-  function closeCourseBtn(btn, label) {
-    btn.removeAttribute('href');
-    btn.style.cursor = 'default';
-    btn.style.opacity = '0.55';
-    btn.querySelector('.btn-title').textContent = label + ' — 마감되었습니다';
-    btn.querySelector('.btn-desc').textContent  = '신청이 마감되었습니다. 다음 기수를 기대해 주세요.';
-    btn.querySelector('.arrow').textContent = '✕';
+function courseBtn(round, courseKey, courseName) {
+  var c = round[courseKey];
+  if (c.closed) {
+    return '<span class="course-btn closed">'
+      + '<span class="arrow">✕</span>'
+      + '<span class="btn-title">' + courseName + ' — 마감되었습니다</span>'
+      + '<span class="btn-desc">신청이 마감되었습니다. 다음 기수를 기대해 주세요.</span>'
+      + '</span>';
   }
+  var href = 'apply.html?round=' + round.no + '&course=' + courseKey;
+  return '<a href="' + href + '" class="course-btn open" id="btn-' + round.no + '-' + courseKey + '">'
+    + '<span class="arrow">→</span>'
+    + '<span class="btn-title">' + courseName + ' 신청하기</span>'
+    + '<span class="btn-desc">' + c.day + '요일 ' + c.time + ' · ' + c.startLabel + ' 시작 · 총 4회차</span>'
+    + '</a>';
+}
 
-  // 기본교육 입금 카운트 확인
-  fetch(SCRIPT_URL)
-    .then(r => r.json())
-    .then(d => {
-      if (d.basic.closed) closeCourseBtn(document.getElementById('btn-basic'), '기본교육');
-    })
-    .catch(() => {});
+var el = document.getElementById('rounds');
+ROUNDS.forEach(function(r) {
+  var div = document.createElement('div');
+  div.className = 'round';
+  div.innerHTML = '<div class="round-h"><span>' + r.label + '</span><span class="start">개강 ' + r.basic.startLabel.split('(')[0] + '~' + r.sensory.startLabel.split('(')[0] + '</span></div>'
+    + '<div class="btn-group">' + courseBtn(r, 'basic', '기본교육') + courseBtn(r, 'sensory', '감각교육') + '</div>';
+  el.appendChild(div);
+});
+
+/* 각 기수·과정별 마감 여부 확인 (백엔드가 기수 단위 관리를 지원하면 이 fetch로 opne/closed 갱신) */
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXFtHC26Ak7YaiK1wl51SYZIgzQ7qYI6lanQtnYK3hrKdedfy5po0vqTz4ozteqHe0/exec';
+fetch(SCRIPT_URL)
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    // 현재 스크립트는 3기(basic/sensory) 통합 값만 제공 — 3기만 반영
+    if (d.basic && d.basic.closed) {
+      var b = document.getElementById('btn-3-basic');
+      if (b) b.outerHTML = '<span class="course-btn closed"><span class="arrow">✕</span><span class="btn-title">기본교육 — 마감되었습니다</span><span class="btn-desc">신청이 마감되었습니다. 다음 기수를 기대해 주세요.</span></span>';
+    }
+  })
+  .catch(function(){});
 </script>
+</body>
 </html>
