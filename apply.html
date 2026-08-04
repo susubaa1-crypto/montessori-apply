@@ -228,6 +228,19 @@ if (!round || !course) {
 
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXFtHC26Ak7YaiK1wl51SYZIgzQ7qYI6lanQtnYK3hrKdedfy5po0vqTz4ozteqHe0/exec';
 
+  // 기수·과정별 실시간 마감 여부 확인 (정원 40명 도달 시)
+  var closeKey = round.label + '_' + COURSE_NAME[courseKey];
+  fetch(SCRIPT_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d[closeKey] && d[closeKey].closed) {
+        document.getElementById('signupForm').style.display = 'none';
+        document.querySelector('.payment-box').style.display = 'none';
+        document.getElementById('closedScreen').style.display = 'block';
+      }
+    })
+    .catch(function(){});
+
   document.getElementById('noReceipt').addEventListener('change', function () {
     var input = document.getElementById('receipt');
     input.value = this.checked ? '필요없음' : '';
@@ -243,7 +256,7 @@ if (!round || !course) {
     var payload = {
       신청시간: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
       기수: round.label,
-      과정구분: round.label + ' ' + COURSE_NAME[courseKey],
+      과정구분: COURSE_NAME[courseKey],
       개강일: course.startLabel,
       이름: document.getElementById('name').value.trim(),
       연락처: document.getElementById('phone').value.trim(),

@@ -159,16 +159,21 @@ ROUNDS.forEach(function(r) {
   el.appendChild(div);
 });
 
-/* 각 기수·과정별 마감 여부 확인 (백엔드가 기수 단위 관리를 지원하면 이 fetch로 opne/closed 갱신) */
+/* 기수·과정별 실시간 마감 여부 확인 (정원 40명 도달 시 자동 마감 표시) */
+var COURSE_NAME = { basic: '기본교육', sensory: '감각교육' };
 var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXFtHC26Ak7YaiK1wl51SYZIgzQ7qYI6lanQtnYK3hrKdedfy5po0vqTz4ozteqHe0/exec';
 fetch(SCRIPT_URL)
   .then(function(r){ return r.json(); })
   .then(function(d){
-    // 현재 스크립트는 3기(basic/sensory) 통합 값만 제공 — 3기만 반영
-    if (d.basic && d.basic.closed) {
-      var b = document.getElementById('btn-3-basic');
-      if (b) b.outerHTML = '<span class="course-btn closed"><span class="arrow">✕</span><span class="btn-title">기본교육 — 마감되었습니다</span><span class="btn-desc">신청이 마감되었습니다. 다음 기수를 기대해 주세요.</span></span>';
-    }
+    ROUNDS.forEach(function(r){
+      ['basic','sensory'].forEach(function(courseKey){
+        var key = r.label + '_' + COURSE_NAME[courseKey];
+        if (d[key] && d[key].closed) {
+          var btn = document.getElementById('btn-' + r.no + '-' + courseKey);
+          if (btn) btn.outerHTML = '<span class="course-btn closed"><span class="arrow">✕</span><span class="btn-title">' + COURSE_NAME[courseKey] + ' — 마감되었습니다</span><span class="btn-desc">신청이 마감되었습니다. 다음 기수를 기대해 주세요.</span></span>';
+        }
+      });
+    });
   })
   .catch(function(){});
 </script>
