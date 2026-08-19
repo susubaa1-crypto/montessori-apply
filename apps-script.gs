@@ -123,6 +123,7 @@ function onEdit(e) {
   };
   const 기수   = norm(sheet.getRange(row, COL_ROUND).getValue());
   const 과정구분 = norm(sheet.getRange(row, COL_COURSE).getValue());
+  Logger.log('row=%s 기수="%s"(len=%s) 과정구분="%s"(len=%s)', row, 기수, 기수.length, 과정구분, 과정구분.length);
 
   if (!연락처) return;
 
@@ -133,6 +134,7 @@ function onEdit(e) {
     if (과정구분.indexOf('기본') !== -1) 단톡방링크 = 'https://open.kakao.com/o/gHRiOzJi';
     else if (과정구분.indexOf('감각') !== -1) 단톡방링크 = 'https://open.kakao.com/o/gAP5PzJi';
   }
+  Logger.log('단톡방링크="%s"', 단톡방링크);
 
   let 문자내용 = `[키키맘] ${이름}님, 입금이 확인되었습니다!\n\n4주 교육이 끝나면 불안한 육아가 자신감과 확신으로 바뀔 겁니다.\n\n좋은 시간을 위해 저희도 최선을 다하겠습니다. 감사합니다.`;
   if (단톡방링크) {
