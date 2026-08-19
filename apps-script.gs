@@ -117,18 +117,22 @@ function onEdit(e) {
 
   const 이름   = sheet.getRange(row, COL_NAME).getValue();
   const 연락처 = sheet.getRange(row, COL_PHONE).getValue();
-  const 기수   = sheet.getRange(row, COL_ROUND).getValue().toString().trim();
-  const 과정구분 = sheet.getRange(row, COL_COURSE).getValue().toString().trim();
+  // 전각/공백/제로폭 문자 등 눈에 안 보이는 잡음 제거 후 비교
+  const norm = function (v) {
+    return v.toString().replace(/\s/g, '').replace(/[​-‍﻿]/g, '');
+  };
+  const 기수   = norm(sheet.getRange(row, COL_ROUND).getValue());
+  const 과정구분 = norm(sheet.getRange(row, COL_COURSE).getValue());
 
   if (!연락처) return;
 
   const 수신번호 = 연락처.toString().replace(/-/g, '');
 
-  const 단톡방_LINKS = {
-    '4기_기본교육': 'https://open.kakao.com/o/gHRiOzJi',
-    '4기_감각교육': 'https://open.kakao.com/o/gAP5PzJi',
-  };
-  const 단톡방링크 = 단톡방_LINKS[기수 + '_' + 과정구분];
+  let 단톡방링크 = '';
+  if (기수.indexOf('4기') !== -1) {
+    if (과정구분.indexOf('기본') !== -1) 단톡방링크 = 'https://open.kakao.com/o/gHRiOzJi';
+    else if (과정구분.indexOf('감각') !== -1) 단톡방링크 = 'https://open.kakao.com/o/gAP5PzJi';
+  }
 
   let 문자내용 = `[키키맘] ${이름}님, 입금이 확인되었습니다!\n\n4주 교육이 끝나면 불안한 육아가 자신감과 확신으로 바뀔 겁니다.\n\n좋은 시간을 위해 저희도 최선을 다하겠습니다. 감사합니다.`;
   if (단톡방링크) {
