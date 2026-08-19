@@ -42,6 +42,10 @@
     .submit-btn:hover:not(:disabled) { background: #6e1414; }
     .submit-btn:disabled { background: #bbb; cursor: not-allowed; }
     .detail-images img { width: 100%; display: block; }
+    .schedule-box { background: #fdf3f3; border: 1px solid #e8c8c8; border-radius: 6px; padding: 18px 20px 16px; margin-bottom: 28px; }
+    .schedule-box-title { font-size: 13px; font-weight: 800; color: #8B1A1A; letter-spacing: 0.3px; margin-bottom: 10px; }
+    .schedule-box-dates { font-size: 14.5px; color: #333; line-height: 1.9; font-weight: 600; }
+    .schedule-box-note { font-size: 12px; color: #999; margin-top: 8px; }
     .success-screen, .closed-screen, .error-screen { display: none; text-align: center; padding: 60px 20px; }
     .success-screen .icon, .closed-screen .icon, .error-screen .icon { font-size: 52px; margin-bottom: 14px; }
     .success-screen h3, .closed-screen h3, .error-screen h3 { font-size: 22px; font-weight: 800; color: #8B1A1A; margin-bottom: 12px; }
@@ -54,12 +58,16 @@
   <a href="index.html">← 교육 선택으로 돌아가기</a>
 </div>
 
-<div class="detail-images" id="detailImages"></div>
-
 <div class="form-wrap" id="formWrap">
   <div class="form-header" id="formHeader">
     <h2 id="headerTitle">수강 신청하기</h2>
     <p>아래 내용을 빠짐없이 작성해 주세요 ✍️</p>
+  </div>
+
+  <div class="schedule-box" id="scheduleBox">
+    <div class="schedule-box-title">🗓️ 교육 일정</div>
+    <div class="schedule-box-dates" id="scheduleDates"></div>
+    <div class="schedule-box-note">※ 상세 커리큘럼은 하단 상세페이지 이미지를 참고해 주세요</div>
   </div>
 
   <div class="payment-box">
@@ -147,15 +155,17 @@
   </div>
 </div>
 
+<div class="detail-images" id="detailImages"></div>
+
 <script>
 /* ===== 기수 데이터 — index.html의 ROUNDS와 동일하게 유지 ===== */
 var ROUNDS = {
   3: { label: '3기', basic: { day:'목', time:'야간 9시~12시', startLabel:'7/23(목)', status:'closed' },
                       sensory: { day:'금', time:'야간 9시~12시', startLabel:'7/24(금)', status:'closed' } },
-  4: { label: '4기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'8/21(금)', status:'open' },
-                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'8/20(목)', status:'open' } },
-  5: { label: '5기', basic: { day:'목', time:'야간 9시~12시', startLabel:'9/17(목)', status:'open' },
-                      sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'9/18(금)', status:'open' } },
+  4: { label: '4기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'8/21(금)', status:'open', sessions:['8/21(금)','8/28(금)','9/4(금)','9/11(금)'] },
+                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'8/20(목)', status:'open', sessions:['8/20(목)','8/27(목)','9/3(목)','9/10(목)'] } },
+  5: { label: '5기', basic: { day:'목', time:'야간 9시~12시', startLabel:'9/17(목)', status:'open', sessions:['9/17(목)','10/1(목)','10/8(목)','10/15(목)'] },
+                      sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'9/18(금)', status:'open', sessions:['9/18(금)','10/2(금)','10/9(금)','10/16(금)'] } },
   6: { label: '6기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'10/23(금)', status:'waiting' },
                       sensory: { day:'목', time:'야간 9시~12시', startLabel:'10/22(목)', status:'waiting' } },
   7: { label: '7기', basic: { day:'목', time:'야간 9시~12시', startLabel:'11/19(목)', status:'waiting' },
@@ -220,23 +230,34 @@ var course = round && round[courseKey];
 if (!round || !course) {
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
+  document.getElementById('scheduleBox').style.display = 'none';
   document.getElementById('errorScreen').style.display = 'block';
 } else if (course.status === 'closed') {
   renderDetailImages(courseKey);
   document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
+  document.getElementById('scheduleBox').style.display = 'none';
   document.getElementById('closedScreen').style.display = 'block';
 } else if (course.status === 'waiting') {
   renderDetailImages(courseKey);
   document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
+  document.getElementById('scheduleBox').style.display = 'none';
   document.getElementById('waitingScreen').style.display = 'block';
 } else {
   renderDetailImages(courseKey);
   document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
   document.title = round.label + ' ' + COURSE_NAME[courseKey] + ' | 호르메 몬테소리 신청';
+
+  if (course.sessions && course.sessions.length) {
+    document.getElementById('scheduleDates').innerHTML = course.sessions.map(function(d, i) {
+      return (i+1) + '강 · ' + d + ' ' + course.time;
+    }).join('<br>');
+  } else {
+    document.getElementById('scheduleBox').style.display = 'none';
+  }
 
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXFtHC26Ak7YaiK1wl51SYZIgzQ7qYI6lanQtnYK3hrKdedfy5po0vqTz4ozteqHe0/exec';
 
