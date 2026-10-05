@@ -166,12 +166,16 @@ var ROUNDS = {
                       sensory: { day:'목', time:'야간 9시~12시', startLabel:'8/20(목)', status:'closed', sessions:['8/20(목)','8/27(목)','9/3(목)','9/10(목)'] } },
   5: { label: '5기', basic: { day:'목', time:'야간 9시~12시', startLabel:'9/17(목)', status:'open', sessions:['9/17(목)','10/1(목)','10/8(목)','10/15(목)'] },
                       sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'9/18(금)', status:'open', sessions:['9/18(금)','10/2(금)','10/9(금)','10/16(금)'] } },
-  6: { label: '6기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'10/23(금)', status:'waiting' },
-                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'10/22(목)', status:'waiting' } },
+  6: { label: '6기', basic: { day:'금', time:'오전 10:30~1:30', startLabel:'10/23(금)', status:'waiting', sessions:['10/23(금)','10/30(금)','11/6(금)','11/13(금)'] },
+                      sensory: { day:'목', time:'야간 9시~12시', startLabel:'10/22(목)', status:'waiting', sessions:['10/22(목)','10/29(목)','11/5(목)','11/12(목)'] } },
   7: { label: '7기', basic: { day:'목', time:'야간 9시~12시', startLabel:'11/19(목)', status:'waiting' },
                       sensory: { day:'금', time:'오전 10:30~1:30', startLabel:'11/20(금)', status:'waiting' } }
 };
-var COURSE_NAME = { basic: '기본교육', sensory: '감각교육' };
+/* 6기 감각교육은 '수교육'으로 과정명 변경 — index.html의 getCourseName과 동일 로직 유지 */
+function getCourseName(roundNo, courseKey) {
+  if (String(roundNo) === '6' && courseKey === 'sensory') return '수교육';
+  return courseKey === 'basic' ? '기본교육' : '감각교육';
+}
 
 var DETAIL_IMAGES = {
   basic: [
@@ -209,11 +213,31 @@ var DETAIL_IMAGES = {
     { src:'images/sensory/15.jpg', alt:'과제 4', link:'https://cafe.naver.com/f-e/cafes/21818873/menus/924' },
     { src:'images/sensory/16.jpg', alt:'감각교육 16' },
     { src:'images/sensory/17.jpg', alt:'감각교육 17' }
+  ],
+  suhak: [
+    { src:'images/suhak/1.jpg', alt:'수교육 1' },
+    { src:'images/suhak/2.jpg', alt:'수교육 2' },
+    { src:'images/suhak/3.jpg', alt:'후기 1', link:'https://naver.me/FgESE6ip' },
+    { src:'images/suhak/4.jpg', alt:'후기 2', link:'https://naver.me/5bCuC4Sq' },
+    { src:'images/suhak/5.jpg', alt:'후기 3', link:'https://naver.me/Ix0W0L7r' },
+    { src:'images/suhak/6.jpg', alt:'수교육 6' },
+    { src:'images/suhak/7.jpg', alt:'수교육 7' },
+    { src:'images/suhak/8.jpg', alt:'수교육 8' },
+    { src:'images/suhak/9.jpg', alt:'과제 1', link:'https://m.cafe.naver.com/ca-fe/web/cafes/21818873/menus/926/articles/write' },
+    { src:'images/suhak/10.jpg', alt:'수교육 10' },
+    { src:'images/suhak/11.jpg', alt:'과제 2', link:'https://m.cafe.naver.com/ca-fe/web/cafes/21818873/menus/927' },
+    { src:'images/suhak/12.jpg', alt:'수교육 12' },
+    { src:'images/suhak/13.jpg', alt:'과제 3', link:'https://m.cafe.naver.com/ca-fe/web/cafes/21818873/menus/928/articles/write' },
+    { src:'images/suhak/14.jpg', alt:'수교육 14' },
+    { src:'images/suhak/15.jpg', alt:'과제 4', link:'https://m.cafe.naver.com/ca-fe/web/cafes/21818873/menus/929/articles/write' },
+    { src:'images/suhak/16.jpg', alt:'수교육 16' },
+    { src:'images/suhak/17.jpg', alt:'수교육 17' }
   ]
 };
 
-function renderDetailImages(courseKey) {
-  var list = DETAIL_IMAGES[courseKey] || [];
+function renderDetailImages(roundNo, courseKey) {
+  var imageSet = (String(roundNo) === '6' && courseKey === 'sensory') ? 'suhak' : courseKey;
+  var list = DETAIL_IMAGES[imageSet] || [];
   var el = document.getElementById('detailImages');
   el.innerHTML = list.map(function(img) {
     var tag = '<img src="' + img.src + '" alt="' + img.alt + '">';
@@ -226,6 +250,7 @@ var roundNo = params.get('round');
 var courseKey = params.get('course');
 var round = ROUNDS[roundNo];
 var course = round && round[courseKey];
+var courseLabel = round ? getCourseName(roundNo, courseKey) : '';
 
 if (!round || !course) {
   document.getElementById('signupForm').style.display = 'none';
@@ -233,23 +258,23 @@ if (!round || !course) {
   document.getElementById('scheduleBox').style.display = 'none';
   document.getElementById('errorScreen').style.display = 'block';
 } else if (course.status === 'closed') {
-  renderDetailImages(courseKey);
-  document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
+  renderDetailImages(roundNo, courseKey);
+  document.getElementById('headerTitle').textContent = round.label + ' ' + courseLabel + ' 신청하기';
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
   document.getElementById('scheduleBox').style.display = 'none';
   document.getElementById('closedScreen').style.display = 'block';
 } else if (course.status === 'waiting') {
-  renderDetailImages(courseKey);
-  document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
+  renderDetailImages(roundNo, courseKey);
+  document.getElementById('headerTitle').textContent = round.label + ' ' + courseLabel + ' 신청하기';
   document.getElementById('signupForm').style.display = 'none';
   document.querySelector('.payment-box').style.display = 'none';
   document.getElementById('scheduleBox').style.display = 'none';
   document.getElementById('waitingScreen').style.display = 'block';
 } else {
-  renderDetailImages(courseKey);
-  document.getElementById('headerTitle').textContent = round.label + ' ' + COURSE_NAME[courseKey] + ' 신청하기';
-  document.title = round.label + ' ' + COURSE_NAME[courseKey] + ' | 호르메 몬테소리 신청';
+  renderDetailImages(roundNo, courseKey);
+  document.getElementById('headerTitle').textContent = round.label + ' ' + courseLabel + ' 신청하기';
+  document.title = round.label + ' ' + courseLabel + ' | 호르메 몬테소리 신청';
 
   if (course.sessions && course.sessions.length) {
     document.getElementById('scheduleDates').innerHTML = course.sessions.map(function(d, i) {
@@ -262,7 +287,7 @@ if (!round || !course) {
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXFtHC26Ak7YaiK1wl51SYZIgzQ7qYI6lanQtnYK3hrKdedfy5po0vqTz4ozteqHe0/exec';
 
   // 기수·과정별 실시간 마감 여부 확인 (정원 40명 도달 시)
-  var closeKey = round.label + '_' + COURSE_NAME[courseKey];
+  var closeKey = round.label + '_' + courseLabel;
   fetch(SCRIPT_URL)
     .then(function(r){ return r.json(); })
     .then(function(d){
@@ -289,7 +314,7 @@ if (!round || !course) {
     var payload = {
       신청시간: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
       기수: round.label,
-      과정구분: COURSE_NAME[courseKey],
+      과정구분: courseLabel,
       개강일: course.startLabel,
       이름: document.getElementById('name').value.trim(),
       연락처: document.getElementById('phone').value.trim(),
